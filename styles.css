@@ -621,6 +621,51 @@ p {
 }
 
 /* ===================================
+   SCROLL ANIMATIONS
+   =================================== */
+
+.fade-up,
+.fade-left,
+.fade-right {
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up {
+    transform: translateY(50px);
+}
+
+.fade-left {
+    transform: translateX(-50px);
+}
+
+.fade-right {
+    transform: translateX(50px);
+}
+
+.fade-up.animate-in,
+.fade-left.animate-in,
+.fade-right.animate-in {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+.hero-content {
+    animation: heroFadeIn 1s ease-out;
+}
+
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
    BACK TO TOP BUTTON
    =================================== */
 

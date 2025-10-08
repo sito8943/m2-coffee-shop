@@ -109,26 +109,71 @@ window.addEventListener('scroll', () => {
 
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -100px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
+// Create observer for scroll animations
+const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('animate-in');
         }
     });
 }, observerOptions);
 
-// Observe sections for fade-in animation
-const sections = document.querySelectorAll('.features, .about, .testimonials, .contact');
-sections.forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(30px)';
-    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(section);
+// Animate hero content on load
+const heroContent = document.querySelector('.hero-content');
+if (heroContent) {
+    heroContent.classList.add('animate-in');
+}
+
+// Animate section titles
+const sectionTitles = document.querySelectorAll('.section-title');
+sectionTitles.forEach(title => {
+    title.classList.add('fade-up');
+    scrollObserver.observe(title);
 });
+
+// Animate feature cards with stagger
+const featureCards = document.querySelectorAll('.feature-card');
+featureCards.forEach((card, index) => {
+    card.classList.add('fade-up');
+    card.style.transitionDelay = `${index * 0.1}s`;
+    scrollObserver.observe(card);
+});
+
+// Animate about section content
+const aboutText = document.querySelector('.about-text');
+const aboutImage = document.querySelector('.about-image');
+if (aboutText) {
+    aboutText.classList.add('fade-left');
+    scrollObserver.observe(aboutText);
+}
+if (aboutImage) {
+    aboutImage.classList.add('fade-right');
+    scrollObserver.observe(aboutImage);
+}
+
+// Animate testimonial cards with stagger
+const testimonialCards = document.querySelectorAll('.testimonial-card');
+testimonialCards.forEach((card, index) => {
+    card.classList.add('fade-up');
+    card.style.transitionDelay = `${index * 0.15}s`;
+    scrollObserver.observe(card);
+});
+
+// Animate contact form
+const contactIntro = document.querySelector('.contact-intro');
+const contactFormElement = document.querySelector('.contact-form');
+if (contactIntro) {
+    contactIntro.classList.add('fade-up');
+    scrollObserver.observe(contactIntro);
+}
+if (contactFormElement) {
+    contactFormElement.classList.add('fade-up');
+    contactFormElement.style.transitionDelay = '0.2s';
+    scrollObserver.observe(contactFormElement);
+}
 
 // ===================================
 // BACK TO TOP BUTTON
