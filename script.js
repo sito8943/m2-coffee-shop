@@ -117,3 +117,74 @@ window.addEventListener('scroll', () => {
 backToTopButton.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// ===================================
+// FAQ ACCORDION
+// ===================================
+
+const faqQuestions = document.querySelectorAll('.faq-question');
+
+faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+        const isExpanded = question.getAttribute('aria-expanded') === 'true';
+        const answerId = question.getAttribute('aria-controls');
+        const answer = document.getElementById(answerId);
+        
+        // Close all other FAQ items
+        faqQuestions.forEach(otherQuestion => {
+            if (otherQuestion !== question) {
+                const otherAnswerId = otherQuestion.getAttribute('aria-controls');
+                const otherAnswer = document.getElementById(otherAnswerId);
+                
+                otherQuestion.setAttribute('aria-expanded', 'false');
+                otherAnswer.setAttribute('hidden', '');
+                otherAnswer.setAttribute('data-open', 'false');
+            }
+        });
+        
+        // Toggle current FAQ item
+        if (isExpanded) {
+            question.setAttribute('aria-expanded', 'false');
+            answer.setAttribute('hidden', '');
+            answer.setAttribute('data-open', 'false');
+        } else {
+            question.setAttribute('aria-expanded', 'true');
+            answer.removeAttribute('hidden');
+            answer.setAttribute('data-open', 'true');
+        }
+    });
+    
+    // Keyboard accessibility
+    question.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            question.click();
+        }
+    });
+});
+
+// Animate FAQ items
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach((item, index) => {
+    item.classList.add('fade-up');
+    item.style.transitionDelay = `${index * 0.08}s`;
+    scrollObserver.observe(item);
+});
+
+// FAQ CTA button - scroll to contact
+const faqCtaButton = document.querySelector('.faq-cta-button');
+if (faqCtaButton) {
+    faqCtaButton.addEventListener('click', () => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            const headerOffset = 80;
+            const elementPosition = contactSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+}
