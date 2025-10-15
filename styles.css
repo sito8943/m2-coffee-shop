@@ -425,9 +425,8 @@ p {
     box-shadow: var(--shadow-md);
 }
 
-.image-placeholder svg {
+.image-placeholder img {
     width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
