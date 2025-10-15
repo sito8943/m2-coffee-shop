@@ -833,7 +833,7 @@ p {
    RESPONSIVE DESIGN - MOBILE FIRST
    =================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 940px) {
     .menu-toggle {
         display: block;
     }
