@@ -239,7 +239,7 @@ p {
     left: 50%;
     transform: translateX(-50%);
     width: 0;
-    height: 2px;
+    height: 2px;.
     background-color: var(--color-primary);
     transition: var(--transition-fast);
 }
@@ -286,6 +286,7 @@ p {
     color: var(--color-text);
     margin-block-end: var(--spacing-lg);
     font-weight: 300;
+    text-wrap: balance;
 }
 
 .cta-button {
